@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\CategoryService;
 use Illuminate\Support\Facades\Session;
+use App\CategoryProduct;
 
 class CategoryController extends Controller
 {
@@ -41,12 +42,28 @@ class CategoryController extends Controller
     }
     public function activeStatusProduct($id){
         $this->categoryServive->active($id);
-        Session::put('message','Active Success');
+        Session::put('message', 'UnActive Success');
         return back();
     }
     public function unactiveStatusProduct($id){
         $this->categoryServive->unactive($id);
-        Session::put('message','UnActive Success');
+        Session::put('message','Active Success');
+        return back();
+    }
+    public function editProduct($id){
+        $product= $this->categoryServive->findProductbyId($id);
+        return view('admin.edit_category_product',compact('product'));
+    }
+    public function updateCategoryProductbyId(Request $request, $id){
+        $name=$request->category_product_name;
+        $slug=$request->slug_category_product;
+        $desc=$request->category_product_desc;
+        $keyword=$request->category_product_keywords;
+        $this->categoryServive->updateCategoryProductbyId($id,$name,$slug,$desc,$keyword);
+        return redirect()->route('admin.show-list-category');
+    }
+    public function deleteCategoryProduct($id){
+        CategoryProduct::where('category_id',$id)->delete();
         return back();
     }
 
