@@ -28,7 +28,6 @@
 @include('layout.slide')
 @yield('content')
 @include('layout.footer')
-
 <script src="{{asset('frontend/js/jquery.js')}}"></script>
 <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('frontend/js/jquery.scrollUp.min.js')}}"></script>
