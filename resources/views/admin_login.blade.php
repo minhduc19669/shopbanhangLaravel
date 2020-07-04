@@ -93,6 +93,7 @@
                 <span style="color: red;margin-left: 30px; font-family: Cambria,sans-serif">{{Session::get('message')}}</span>
                 {{Session::put('message', null)}}
             @endif
+
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
