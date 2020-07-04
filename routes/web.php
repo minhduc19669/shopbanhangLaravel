@@ -27,6 +27,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/edit-Product/{id}', 'CategoryController@editProduct')->name('admin.editProduct');
     Route::post('/updateProduct/{id}', 'CategoryController@updateCategoryProductbyId' )->name('admin.updateCategoryProduct');
     Route::get('/delete/{id}', 'CategoryController@deleteCategoryProduct')->name('admin.deleteCategory');
+    Route::get('/list-brand-product','BrandProductController@index')->name('admin.list_brand');
+    Route::get('/add-brand-product','BrandProductController@addBrandProduct')->name('admin.add_Brand');
+    Route::post('/create-brand-product/','BrandProductController@store')->name('admin.create_brand_product');
+    Route::get('/active-brand/{id}','BrandProductController@activeBrandProduct')->name('admin.active_brand');
+    Route::get('/unactive-brand/{id}','BrandProductController@unactiveBrandProduct')->name('admin.unactive_brand');
+
+
 });
 
 // Route::prefix('admin')->group(function(){
