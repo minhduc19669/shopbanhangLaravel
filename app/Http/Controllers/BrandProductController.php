@@ -35,6 +35,7 @@ class BrandProductController extends Controller
         return redirect()->route('admin.list_brand');
     }
     public function unactiveBrandProduct($id){
+        // dd($id);
         BrandProduct::where('brand_id',$id)->update(['brand_status'=>1]);
         Session::put('message','Active Sucsess!');
         return back();

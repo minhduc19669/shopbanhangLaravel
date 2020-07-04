@@ -60,7 +60,7 @@
                             <td>{{$brand->brand_desc}}</td>
                             <td><span class="text-ellipsis">
                     @if($brand->brand_status==1)
-                                        <a href="{{route('admin.active_brand',$brand->brand_id)}}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                        <a href="{{route('admin.active_brand',$brand->brand_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
                                     @else
                                         <a href="{{route('admin.unactive_brand',$brand->brand_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
                                     @endif
