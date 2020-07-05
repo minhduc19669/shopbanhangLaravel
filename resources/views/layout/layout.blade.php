@@ -13,6 +13,7 @@
     <link href="{{asset('frontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('frontend/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('frontend/css/responsive.css')}}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('5450a1d242bd8945c12b0c8db58a2bcd.ico/favicon-32x32.png')}}">
 <!--[if lt IE 9]>
     <script src="{{asset('frontend/frontend/js/html5shiv.js')}}"></script>
     <script src="{{asset('frontend/frontend/js/respond.min.js')}}"></script>

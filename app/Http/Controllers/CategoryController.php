@@ -42,12 +42,12 @@ class CategoryController extends Controller
     }
     public function activeStatusProduct($id){
         $this->categoryServive->active($id);
-        Session::put('message', 'UnActive Success');
+        Session::put('message', 'Active Success');
         return back();
     }
     public function unactiveStatusProduct($id){
         $this->categoryServive->unactive($id);
-        Session::put('message','Active Success');
+        Session::put('message','unActive Success');
         return back();
     }
     public function editProduct($id){

@@ -58,16 +58,20 @@
                             <td>{{$product->category_name}}</td>
                             <td>{{$product->slug_category_product}}</td>
                             <td><span class="text-ellipsis">
-                                    @if($product->category_status==1)
-                                        <a href="{{route('admin.active_product',$product->category_id)}}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                    @if($product->category_status == 0)
+                                        <a href="{{route('admin.unactive_category_product',$product->category_id)}}"><span
+                                                class="fa-thumb-styling fa fa-thumbs-up"></span></a>
                                     @else
-                                        <a href="{{route('admin.unactive_product',$product->category_id)}}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                                        <a href="{{route('admin.active_category_product',$product->category_id)}}"><span
+                                                class="fa-thumb-styling fa fa-thumbs-down"></span></a>
                                     @endif
             </span></td>
                             <td>
-                            <a href="{{ route('admin.editProduct', ['id'=>$product->category_id]) }}" class="active styling-edit" ui-toggle-class="">
+                                <a href="{{ route('admin.editProduct', ['id'=>$product->category_id]) }}"
+                                   class="active styling-edit" ui-toggle-class="">
                                     <i class="fa fa-pencil-square-o text-success text-active"></i></a>
-                                <a onclick="return confirm('Bạn có chắc là muốn xóa danh mục này ko?')" href="{{ route('admin.deleteCategory', ['id'=>$product->category_id]) }}"
+                                <a onclick="return confirm('Bạn có chắc là muốn xóa danh mục này ko?')"
+                                   href="{{ route('admin.deleteCategory', ['id'=>$product->category_id]) }}"
                                    class="active styling-edit" ui-toggle-class="">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
