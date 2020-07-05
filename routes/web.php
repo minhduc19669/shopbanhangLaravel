@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/admin', 'AdminController@showFormLogin');
+Route::get('/admin', 'AdminController@showFormLogin')->name('admin.login');
 Route::post('/admin', 'AdminController@login')->name('login.admin');
 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 Route::prefix('admin')->group(function () {
@@ -47,7 +47,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/add-product','ProductController@createproduct')->name('admin.create_product');
     Route::get('/delete-product/{id}','ProductController@deleteproduct')->name('admin.delete_product');
     Route::get('/edit-product/{id}','ProductController@editproduct')->name('admin.edit_product');
-    Route::post('/store-product','ProductController@storeproduct')->name('admin.store_product');
+    Route::post('/store-product/{id}','ProductController@storeproduct')->name('admin.store_product');
     Route::get('/active-product/{id}','ProductController@active')->name('admin.active_product');
     Route::get('/unactive-product/{id}','ProductController@unactive')->name('admin.unactive_product');
 });

@@ -17,7 +17,7 @@
 
                             <div class="position-center">
                                 @foreach($products as $key => $pro)
-                                <form role="form" action="" method="post" enctype="multipart/form-data">
+                                <form role="form" action="{{route('admin.store_product',$pro->product_id)}}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên sản phẩm</label>
@@ -83,6 +83,7 @@
                                 </div>
 
                                 <button type="submit" name="add_product" class="btn btn-info">Cập nhật sản phẩm</button>
+                                    <a href="{{route('admin.list_product')}}" class="btn btn-danger">Cancel</a>
                                 </form>
                                 @endforeach
                             </div>

@@ -10,6 +10,7 @@ class BrandProductController extends Controller
 {
     //
 
+
     public function index()
     {
         $brands = BrandProduct::all();

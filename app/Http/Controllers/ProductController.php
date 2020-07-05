@@ -87,6 +87,52 @@ class ProductController extends Controller
         $products = Product::where('product_id',$id)->get();
         return view('admin.edit_product', compact('products','cate_product','brand_product'));
     }
+    public function storeproduct(Request $request,$id){
+            if ($request->hasFile('product_image')) {
+                try {
+                    $this->validate($request, ['product_image' => 'mimes:jpg,jpeg,png,gif|max:2048'], ['product_image.mimes' => 'Chỉ chấp nhận hình với đuôi .jpg .jpeg .png .gif',
+                        'product.max' => 'Hình giới hạn dung lượng không quá 2M',
+                    ]);
+                    $image = $request->file('product_image');
+                    $get_image = time() . '_' . $image->getClientOriginalName();
+                    $location = public_path('uploads/product');
+                    $image->move($location, $get_image);
+                    Product::where('product_id',$id)->update([
+                        'product_name' => $request->product_name,
+                        'product_quantity' => $request->product_quantity,
+                        'product_slug' => $request->product_slug,
+                        'category_id' => $request->product_cate,
+                        'brand_id' => $request->product_brand,
+                        'product_price' => $request->product_price,
+                        'product_desc' => $request->product_desc,
+                        'product_content' => $request->product_content,
+                        'product_image' => $get_image,
+                        'product_sold' => 1,
+                        'product_status' => $request->product_status
+                    ]);
+                    Session::put('message', 'Cập nhập thành công!');
+                } catch (ValidationException $e) {
+                    $message = 'Error:' . $e->getMessage();
+                    Session::put('message', $message);
+
+                }
+            } else {
+                Product::where('product_id',$id)->update([
+                    'product_name' => $request->product_name,
+                    'product_quantity' => $request->product_quantity,
+                    'product_slug' => $request->product_slug,
+                    'category_id' => $request->product_cate,
+                    'product_price' => $request->product_price,
+                    'brand_id' => $request->product_brand,
+                    'product_desc' => $request->product_desc,
+                    'product_content' => $request->product_content,
+                    'product_sold' => 1,
+                    'product_status' => $request->product_status
+                ]);
+                Session::put('message','Cập nhập thành công!');
+            }
+            return back();
+    }
 
     public function deleteproduct($id)
     {
