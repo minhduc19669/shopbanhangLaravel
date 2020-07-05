@@ -14,11 +14,13 @@ class ProductController extends Controller
 
     public function index()
     {
+//        $products=Product::find(1);
+//        dd($products->category->category_name);
         $products =
             Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
                 ->join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')
                 ->orderBy('product_id','desc')
-                ->paginate(5);
+                ->paginate(4);
         return view('admin.all_product', compact('products'));
 
     }
