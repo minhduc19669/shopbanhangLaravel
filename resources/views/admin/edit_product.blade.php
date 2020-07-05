@@ -16,8 +16,8 @@
                         <div class="panel-body">
 
                             <div class="position-center">
-                                @foreach($edit_product as $key => $pro)
-                                <form role="form" action="{{URL::to('/update-product/'.$pro->product_id)}}" method="post" enctype="multipart/form-data">
+                                @foreach($products as $key => $pro)
+                                <form role="form" action="" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên sản phẩm</label>
@@ -38,7 +38,7 @@
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
                                     <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
-                                    <img src="{{URL::to('public/uploads/product/'.$pro->product_image)}}" height="100" width="100">
+                                    <img src="{{asset('uploads/product/'.$pro->product_image)}}" height="100" width="100">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả sản phẩm</label>
@@ -58,7 +58,6 @@
                                             <option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
                                             @endif
                                         @endforeach
-                                            
                                     </select>
                                 </div>
                                  <div class="form-group">
@@ -71,7 +70,7 @@
                                             <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
                                              @endif
                                         @endforeach
-                                            
+
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -79,10 +78,10 @@
                                       <select name="product_status" class="form-control input-sm m-bot15">
                                             <option value="0">Ẩn</option>
                                             <option value="1">Hiển thị</option>
-                                            
+
                                     </select>
                                 </div>
-                               
+
                                 <button type="submit" name="add_product" class="btn btn-info">Cập nhật sản phẩm</button>
                                 </form>
                                 @endforeach

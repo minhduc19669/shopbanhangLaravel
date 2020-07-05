@@ -45,4 +45,24 @@ class BrandProductController extends Controller
         Session::put('message','unActive Sucsess!');
         return back();
     }
+    public function delete($id){
+        BrandProduct::where('brand_id',$id)->delete();
+        Session::put('message','Delete done!');
+        return back();
+    }
+    public function editBrand($id){
+        $brands_product=BrandProduct::where('brand_id',$id)->get();
+        return view('admin.edit_brand_product',compact('brands_product'));
+    }
+    public function updateBrandProduct(Request $request,$id){
+
+        BrandProduct::where('brand_id',$id)->update([
+            'brand_name'=>$request->brand_product_name,
+            'brand_slug'=>$request->brand_product_slug,
+            'brand_desc'=>$request->brand_product_desc,
+            'brand_status'=>$request->brand_product_status
+        ]);
+        Session::put('message','Cập nhập thương hiệu thành công!');
+        return back();
+    }
 }
