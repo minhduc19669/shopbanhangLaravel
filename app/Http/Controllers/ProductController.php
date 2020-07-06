@@ -22,7 +22,21 @@ class ProductController extends Controller
                 ->orderBy('product_id','desc')
                 ->paginate(4);
         return view('admin.all_product', compact('products'));
-
+    }
+    public function show_category_product($id){
+        $products = Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
+                ->where('tbl_product.category_id',$id)
+                ->orderBy('product_id','desc')
+                ->paginate(4);
+        $desc_name=CategoryProduct::where('category_id',$id)->take(1)->get();
+        return view('pages.category_product',compact('products','desc_name'));
+    }
+    public function show_brand_product($id){
+        $products = Product::join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')->where('tbl_product.brand_id',$id)
+                ->orderBy('product_id','desc')
+                ->paginate(4);
+        $brand_name=BrandProduct::where('brand_id',$id)->take(1)->get();
+        return view('pages.brand_product',compact('products','brand_name'));
     }
 
     public function addProduct()
@@ -151,6 +165,10 @@ class ProductController extends Controller
         Product::where('product_id',$id)->update(['product_status'=>1]);
         Session::put('message', 'un Active Sucsess!');
         return back();
+    }
+
+    public function show_detail_product($id){
+        return view('pages.detail_product');
     }
 
 }

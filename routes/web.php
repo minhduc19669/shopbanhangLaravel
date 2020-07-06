@@ -12,17 +12,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//page-shop
 
 Route::prefix('/')->group(function (){
     Route::get('/home', 'HomeController@index');
+    Route::get('/home/category-product/{id}','ProductController@show_category_product')->name('show_list_category_product');
+    Route::get('/home/brand-product/{id}','ProductController@show_brand_product')->name('show_list_brand_product');
+    Route::get('/home/product-detail/{id}','ProductController@show_detail_product')->name('detai_product');
 });
 
+//login
 
 Route::get('/admin', 'AdminController@showFormLogin')->name('admin.login');
 Route::post('/admin', 'AdminController@login')->name('login.admin');
 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
+//admin
 
 
 Route::middleware(['admin'])->group(function () {

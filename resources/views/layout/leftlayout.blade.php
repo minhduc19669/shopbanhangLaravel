@@ -5,7 +5,7 @@
                         <div class="panel panel-default">
                             @foreach($categories as $category)
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">{{$category->category_name}}</a></h4>
+                                <h4 class="panel-title"><a href="{{route('show_list_category_product',$category->category_id)}}">{{$category->category_name}}</a></h4>
                             </div>
                             @endforeach
                         </div>
@@ -15,7 +15,7 @@
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 @foreach($brands as $brand)
-                                <li><a href="#"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
+                                <li><a href="{{route('show_list_brand_product',$brand->brand_id)}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
                                 @endforeach
                             </ul>
                         </div>

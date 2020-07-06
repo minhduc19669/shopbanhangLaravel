@@ -19,7 +19,8 @@ class AdminLogin
     public function handle($request, Closure $next)
     {
         $admin_login=Session::get('admin_name');
-        if (!$admin_login){
+//        $methos=$request->method();
+        if (!$admin_login ){
             return redirect()->route('admin.login');
         }
         return $next($request);
