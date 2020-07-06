@@ -23,21 +23,7 @@ class ProductController extends Controller
                 ->paginate(4);
         return view('admin.all_product', compact('products'));
     }
-    public function show_category_product($id){
-        $products = Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
-                ->where('tbl_product.category_id',$id)
-                ->orderBy('product_id','desc')
-                ->paginate(4);
-        $desc_name=CategoryProduct::where('category_id',$id)->take(1)->get();
-        return view('pages.category_product',compact('products','desc_name'));
-    }
-    public function show_brand_product($id){
-        $products = Product::join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')->where('tbl_product.brand_id',$id)
-                ->orderBy('product_id','desc')
-                ->paginate(4);
-        $brand_name=BrandProduct::where('brand_id',$id)->take(1)->get();
-        return view('pages.brand_product',compact('products','brand_name'));
-    }
+
 
     public function addProduct()
     {
@@ -166,9 +152,37 @@ class ProductController extends Controller
         Session::put('message', 'un Active Sucsess!');
         return back();
     }
+    public function show_category_product($id){
+        $products = Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
+            ->where('tbl_product.category_id',$id)
+            ->orderBy('product_id','desc')
+            ->get();
+        $desc_name=CategoryProduct::where('category_id',$id)->take(1)->get();
+        return view('pages.category_product',compact('products','desc_name'));
+    }
+    public function show_brand_product($id){
+        $products = Product::join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')
+            ->where('tbl_product.brand_id',$id)
+            ->orderBy('product_id','desc')
+            ->get();
+        $brand_name=BrandProduct::where('brand_id',$id)->take(1)->get();
+        return view('pages.brand_product',compact('products','brand_name'));
+    }
 
     public function show_detail_product($id){
-        return view('pages.detail_product');
+        $products = Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
+            ->join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')
+            ->where('product_id',$id)
+            ->orderBy('product_id','desc')
+            ->get();
+        foreach ($products as $value){
+            $orther_id=$value->category_id;
+        }
+        $ortherProducts=Product::join('tbl_category_product','tbl_category_product.category_id', '=', 'tbl_product.category_id')
+            ->join('tbl_brand','tbl_brand.brand_id', '=', 'tbl_product.brand_id')
+            ->where('tbl_category_product.category_id',$orther_id)->whereNotIn('tbl_product.product_id',[$id])
+            ->get();
+        return view('pages.detail_product',compact('products','ortherProducts'));
     }
 
 }
